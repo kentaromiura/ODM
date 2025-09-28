@@ -1,0 +1,26 @@
+{
+  "name": "odm",
+  "version": "1.0.0",
+  "description": "ODM Proxy Server",
+  "main": "src/index.js",
+  "bin": "./src/cli.js",
+  "scripts": {
+    "start": "tsx src/cli.ts"
+  },
+  "author": "Cristian Carlesso <kentaromiura@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/http-proxy": "^1.17.16",
+    "@types/node": "^24.3.0",
+    "nodemon": "^3.1.4",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@lmstudio/sdk": "^1.5.0",
+    "clint": "github:kentaromiura/clint",
+    "http-proxy": "^1.18.1",
+    "raw-body": "^3.0.0",
+    "stream-array": "^1.1.2"
+  }
+}
