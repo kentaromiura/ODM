@@ -1,11 +1,15 @@
 # ODM Proxy Server
 
-This is a tiny proxy server to handle on demand load/unload of models from LM Studio, LM Studio already loads a model on first request, but this allow to always have at most 1 model loaded (plus eventual allowList), which is the case for most multi model development setup
+This is a tiny proxy server to handle on demand load/unload of models from LM Studio, LM Studio already loads a model on first request, but this allow to always have at most 1 model loaded (plus eventual allowList), which is the case for most multi model development setup.
 
 ## Flags
+
  --port, -p      : Port to serve on (default: 1234)
+ 
  --proxy, -x     : Port to proxy to (default: 12345)
+ 
  --allowlist, -a : Comma separated allowlist model names
+ 
  --help, -h      : This help screen.
 
 ## Getting Started
