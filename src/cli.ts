@@ -8,6 +8,7 @@ let portValue = 1234;
 let proxyValue = 12345;
 let allowList: string[] = [];
 let showHelp = false;
+let lemon = false;
 // Set up port parameter (default 1234)
 cli.command("--port", "-p", "Port to serve on (default: 1234)");
 
@@ -18,9 +19,13 @@ cli.command("--proxy", "-x", "Port to proxy to (default: 12345)");
 cli.command("--allowlist", "-a", "Comma separated allowlist model names");
 
 cli.command("--help", "-h", "This help screen.");
+cli.command("--lemon", "-l", "Use lemonade API");
 // Handle command line arguments
 cli.on("command", function (name: string, value: string) {
   switch (name) {
+    case "--lemon":
+      lemon = true;
+      break;
     case "--help":
       showHelp = true;
       break;
@@ -46,13 +51,23 @@ cli.on("complete", function () {
   console.log("- Serving on port:", portValue);
   console.log("- Proxying to port:", proxyValue);
   console.log("- Allow list:", allowList);
+  console.log(lemon ? "Using lemonade API" : "");
 
   // Import and start the server with these parameters
   import("./index.js")
     .then(async (module) => {
-      const { createProxyServer } = module;
-      console.log("Starting proxy server with parameters...");
-      await createProxyServer(portValue, proxyValue, allowList);
+      const { createProxyServer, createProxyLemon } = module;
+
+      console.log(
+        "Starting " +
+          (lemon ? "lemon " : "") +
+          "proxy server with parameters...",
+      );
+      await (lemon ? createProxyLemon : createProxyServer)(
+        portValue,
+        proxyValue,
+        allowList,
+      );
     })
     .catch((err) => {
       console.error("Failed to start server:", err);
